@@ -24,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
     private readonly int m_Speed = Animator.StringToHash("Speed");
 
     private float shootDirection = 1f;
+
+    //private HingeJoint2D _hingeJoint;
+    private Transform child;
+    [SerializeField] private LayerMask movable;
+    [SerializeField] private Transform rayStart;
     
     private void Awake()
     {
@@ -38,9 +43,24 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W)) jump = true;
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _shootController.Shoot(shootDirection);
+        }
+        
+        if (Input.GetKeyUp(KeyCode.RightShift))
+        {
+            // if (_hingeJoint != null)
+            // {
+            //     _hingeJoint.connectedBody = null;
+            //     _hingeJoint = null;
+            // }
+            if (child != null)
+            {
+                child.parent = null;
+                child = null;
+            }
         }
     }
 
@@ -84,6 +104,29 @@ public class PlayerMovement : MonoBehaviour
         }
 
         m_Anim.SetFloat(m_Speed, Mathf.Abs(moveX));
+
+        if (Input.GetKey(KeyCode.RightShift))
+        {
+            // if (_hingeJoint == null)
+            // {
+            //     var hit = Physics2D.Raycast(rayStart.position, new Vector3(shootDirection, 0, 0),
+            //         0.5f, movable);
+            //     _hingeJoint = hit.collider.gameObject.GetComponent<HingeJoint2D>();
+            //     _hingeJoint.connectedBody = m_Rigidbody2D;
+            //}
+            if (child == null)
+            {
+                var hit = Physics2D.Raycast(rayStart.position, new Vector3(shootDirection, 0, 0),
+                    0.5f, movable);
+                if (hit != null)
+                {
+                    child = hit.collider.transform;
+                    child.parent = transform;
+                }
+            }
+        }
+
+        
     }
 
     private void Flip()

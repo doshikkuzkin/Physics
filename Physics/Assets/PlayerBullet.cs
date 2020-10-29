@@ -15,6 +15,10 @@ public class PlayerBullet : MonoBehaviour
         if (other.gameObject.GetComponent<Enemy>() != null)
         {
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Crate"))
+        {
             Destroy(gameObject);
         }
     }

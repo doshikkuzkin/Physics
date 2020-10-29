@@ -12,5 +12,6 @@ public class ShootController : MonoBehaviour
     {
         var bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody2D>();
         bullet.velocity = new Vector2(direction, 0) * bulletSpeed;
+        Debug.Log("Bullet");
     }
 }
