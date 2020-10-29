@@ -12,12 +12,16 @@ public class UnknownPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            var _platform = Instantiate(platform, transform.position, Quaternion.identity);
-            var forceComponent = _platform.GetComponent<ForcePlatform>();
-            if (forceComponent != null)
+            if (platform != null)
             {
-                forceComponent.Force = force;
+                var _platform = Instantiate(platform, transform.position, Quaternion.identity);
+                var forceComponent = _platform.GetComponent<ForcePlatform>();
+                if (forceComponent != null)
+                {
+                    forceComponent.Force = force;
+                }
             }
+
             Destroy(gameObject);
         }
     }
