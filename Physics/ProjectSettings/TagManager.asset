@@ -14,10 +14,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
+  - Bullet
+  - PlayerBullet
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Platforms
+    uniqueID: 26781053
+    locked: 0
+  - name: Player
+    uniqueID: 267892529
     locked: 0
